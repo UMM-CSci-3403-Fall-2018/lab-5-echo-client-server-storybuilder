@@ -34,6 +34,7 @@ public class EchoClient
       OutputStream output = socket.getOutputStream();
       InputStream input = socket.getInputStream();
 
+
       //While there is more characters in the keyboard input(?)
       int b;
       while ((b = System.in.read()) != -1)
@@ -41,18 +42,20 @@ public class EchoClient
         output.write(b);
       }
 
+      output.flush();
+
+      System.out.println("Finished writing...");
+
       //Read the binary from the server ((CURRENTLY THE PROBLEM))
-      int line;
-      while((line = input.read()) != -1)
+      int c;
+      while ((c = input.read()) != -1)
       {
-        System.out.println(line);
+        System.out.println(c);
       }
 
-      /*Print all the input we receive from the server
-      String line;
-      while ((line = reader.readLine()) != null) {
-        System.out.println(line);
-      }*/
+      System.out.println("Finished reading...");
+
+      input.close();
 
       // Close the socket when we're done reading from it
       socket.close();
