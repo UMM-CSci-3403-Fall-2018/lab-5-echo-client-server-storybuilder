@@ -2,8 +2,8 @@ cd src/
 
 javac echoserver/EchoClient.java
 
-java echoserver.EchoClient
+javac echoserver/EchoServer.java
 
 cd ..
 
-bats test/Echo_client.bats
+#bats test/Echo_client.bats

@@ -34,28 +34,23 @@ public class EchoClient
       OutputStream output = socket.getOutputStream();
       InputStream input = socket.getInputStream();
 
-
       //While there is more characters in the keyboard input(?)
-      int b;
-      while ((b = System.in.read()) != -1)
+      int b = System.in.read();
+      while (b != -1)
       {
+        //Possible issue with System.in.read() also capturing things like hitting enter (which results in a 10 on the ASCII table)
         output.write(b);
+        b = System.in.read();
       }
 
       output.flush();
 
-      System.out.println("Finished writing...");
-
-      //Read the binary from the server ((CURRENTLY THE PROBLEM))
+      //Read all the incoming data from the server and print it back (which should be the same)
       int c;
-      while ((c = input.read()) != -1)
+      while((c = input.read()) != -1)
       {
         System.out.println(c);
       }
-
-      System.out.println("Finished reading...");
-
-      input.close();
 
       // Close the socket when we're done reading from it
       socket.close();
