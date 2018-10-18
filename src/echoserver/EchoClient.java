@@ -43,8 +43,6 @@ public class EchoClient
         // Send byte to the server
         output.write(b);
 
-        //output.flush();
-
         // Server reads byte
         b = input.read();
 
@@ -52,6 +50,10 @@ public class EchoClient
         System.out.write(b);
 
       }
+
+      // Not quite sure how this fixes binary content, but my assumption is that it the while loop was
+      // getting too many ending bits, so flushing the output stops the binary from being screwed up
+      System.out.flush();
 
       // Close the socket when we're done reading from it
       socket.close();
